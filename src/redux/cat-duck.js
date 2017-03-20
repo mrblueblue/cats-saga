@@ -4,6 +4,7 @@ export const FETCH_CATS_REQUEST = "FETCH_CATS_REQUEST"
 export const FETCH_CATS_OPTIMISTIC_RESPONSE = "FETCH_CATS_OPTIMISTIC_RESPONSE"
 export const FETCH_CATS_SUCCESS = "FETCH_CATS_SUCCESS"
 export const FETCH_CATS_ERROR = "FETCH_CATS_ERROR"
+export const DELETE_CAT = "DELETE_CAT"
 
 export const initialState = {
   list: [],
@@ -38,6 +39,12 @@ export function fetchCatsError (error) {
   }
 }
 
+export function deleteCat (index) {
+  return {
+    type: DELETE_CAT
+  }
+}
+
 export function catsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_CATS_REQUEST:
@@ -62,6 +69,12 @@ export function catsReducer (state = initialState, action) {
         list: state.list.slice(0, state.list.length - API_LIMIT),
         loading: false,
         error: action.error
+      })
+    case DELETE_CAT:
+      const newList = state.list.slice()
+      newList.splice(action.index, 1)
+      return Object.assign({}, state, {
+        list: newList,
       })
     default:
       return state

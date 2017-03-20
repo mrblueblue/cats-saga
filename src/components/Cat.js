@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "./Image"
 import Fact from "./Fact"
+import deleteIcon from './delete.svg';
 import "./Cat.css"
 
 export default class Cat extends React.Component {
@@ -11,6 +12,11 @@ export default class Cat extends React.Component {
 
   handleImageError = () => {
     this.setState({imageError: true})
+  }
+
+  deleteCat = () => {
+    this.setState({imageError: true})
+    this.props.deleteCat(this.props.index)
   }
 
   render () {
@@ -33,6 +39,14 @@ export default class Cat extends React.Component {
                 text={this.props.fact}
               />
             </div>
+            {!this.props.loading && (
+              <img
+                src={deleteIcon}
+                onClick={this.deleteCat}
+                className="delete-icon"
+                alt="delete"
+              />
+            )}
         </div>
       </li>
     )

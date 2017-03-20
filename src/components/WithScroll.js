@@ -1,10 +1,14 @@
 import React from "react"
 
+const LIMIT_MULTIPLIER = 0.8
+const THROTTLE_LIMIT = 300
+
+
 function throttle(callback, limit) {
-  var wait = false;
+  let wait = false;
   return function () {
     if (!wait) {
-      callback.call();
+      callback();
       wait = true;
       setTimeout(function () {
         wait = false
@@ -16,14 +20,14 @@ function throttle(callback, limit) {
 export default class WithScroll extends React.Component {
   componentDidMount () {
     this.onScroll = throttle((e) => {
-      var scrollTop = window.pageYOffset;
-      var scrollPosition = scrollTop + document.documentElement.clientHeight;
-      var delta = document.documentElement.offsetHeight - scrollPosition;
-      var limit = document.documentElement.clientHeight * 0.8;
+      const scrollTop = window.pageYOffset;
+      const scrollPosition = scrollTop + document.documentElement.clientHeight;
+      const delta = document.documentElement.offsetHeight - scrollPosition;
+      const limit = document.documentElement.clientHeight * LIMIT_MULTIPLIER;
       if (delta < limit){
         this.props.onScroll()
       }
-    }, 300)
+    }, THROTTLE_LIMIT)
 
     window.addEventListener('scroll', this.onScroll, false)
   }
@@ -33,6 +37,6 @@ export default class WithScroll extends React.Component {
   }
 
   render () {
-    return this.props.children
+    return <div>{this.props.children}</div>
   }
 }

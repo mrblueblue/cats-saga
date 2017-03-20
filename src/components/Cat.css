@@ -1,9 +1,21 @@
-ul {
+ul.App-content {
   list-style: none;
+  padding: 0 1em;
+  font-size: .75em;
+}
+
+.delete-icon {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .cat-wrapper {
-  margin: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 1em;
 }
 
 .hide {
@@ -11,13 +23,14 @@ ul {
 }
 
 .cat-thumbnail {
-  width: 300px;
-  height: 200px;
+  width: 120px;
+  height: 80px;
   object-fit: cover;
 }
 
 .cat-item {
   display: flex;
+  position: relative;
   background: #fff;
   border: 1px solid;
   border-color: #f3f3f3;
@@ -30,11 +43,10 @@ ul {
 }
 
 .cat-content-right {
-  margin-left: 25px;
+  margin-left: .5em;
 }
 
 .cat-fact {
-  line-height: 25px;
   margin-top: 0;
 }
 

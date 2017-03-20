@@ -1,13 +1,9 @@
-.App-content {
-  padding: 0 75px;
-}
-
 .App-header {
-  background-color: #3498db;
-  height: 100px;
-  padding: 25px;
-  padding-left: 125px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
   color: white;
+  background-color: #3498db;
 }
 
 .App-intro {
