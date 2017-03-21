@@ -1,7 +1,5 @@
-export const API_LIMIT = 25
-
 export const FETCH_CATS_REQUEST = "FETCH_CATS_REQUEST"
-export const FETCH_CATS_OPTIMISTIC_RESPONSE = "FETCH_CATS_OPTIMISTIC_RESPONSE"
+export const FETCH_CATS_ADD_OPTIMISTIC_RESPONSE = "FETCH_CATS_ADD_OPTIMISTIC_RESPONSE"
 export const FETCH_CATS_SUCCESS = "FETCH_CATS_SUCCESS"
 export const FETCH_CATS_ERROR = "FETCH_CATS_ERROR"
 export const DELETE_CAT = "DELETE_CAT"
@@ -18,10 +16,10 @@ export function fetchCatsRequest () {
   }
 }
 
-export function fetchCatsOptimisticResponse () {
+export function addOptimisticResponse () {
   return {
-    type: FETCH_CATS_OPTIMISTIC_RESPONSE,
-    cats: [...Array(API_LIMIT)].map(a => ({loading: true}))
+    type: FETCH_CATS_ADD_OPTIMISTIC_RESPONSE,
+    cats: [{loading: true}]
   }
 }
 
@@ -52,7 +50,7 @@ export function catsReducer (state = initialState, action) {
         loading: true,
         error: false
       })
-    case FETCH_CATS_OPTIMISTIC_RESPONSE:
+    case FETCH_CATS_ADD_OPTIMISTIC_RESPONSE:
       return Object.assign({}, state, {
         list: state.list.concat(action.cats),
         loading: true,
@@ -60,13 +58,13 @@ export function catsReducer (state = initialState, action) {
       })
     case FETCH_CATS_SUCCESS:
       return Object.assign({}, state, {
-        list: state.list.slice(0, state.list.length - API_LIMIT).concat(action.cats),
+        list: state.list.filter(a => !a.loading).concat(action.cats),
         loading: false,
         error: false
       })
     case FETCH_CATS_ERROR:
       return Object.assign({}, state, {
-        list: state.list.slice(0, state.list.length - API_LIMIT),
+        list: state.list.filter(a => !a.loading),
         loading: false,
         error: action.error
       })

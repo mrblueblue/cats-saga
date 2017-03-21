@@ -18,6 +18,7 @@ function throttle(callback, limit) {
 }
 
 export default class WithScroll extends React.Component {
+  
   componentDidMount () {
     this.onScroll = throttle((e) => {
       const scrollTop = window.pageYOffset;
