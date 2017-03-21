@@ -53,7 +53,7 @@ export function catsReducer (state = initialState, action) {
     case FETCH_CATS_ADD_OPTIMISTIC_RESPONSE:
       return Object.assign({}, state, {
         list: state.list.concat(action.cats),
-        loading: true,
+        loading: false,
         error: false
       })
     case FETCH_CATS_SUCCESS:
